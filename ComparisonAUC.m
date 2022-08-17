@@ -42,3 +42,12 @@ figure
 boxchart([averages,averages2])
 set(gca,'XTickLabel',{"day 3 YFP", "day 3 hm4di"})
 %set(gca,'XTickLabel',{"day 17 CH1 YFP", "day 17 CH2 YFP","day 17 CH1 hm4di","day 17 CH1 hm4di"});
+[h,p,ci,stats] = ttest2(averages,averages2) 
+if p<0.01
+    yt = get(gca, 'YTick');
+    axis([xlim    0  ceil(max(yt)*1.2)])
+    xt = [1 2];
+    hold on
+    plot(xt([1 2]), [1 1]*max(yt)*1.1, '-k',  mean(xt([1 2])), max(yt)*1.15, '*k')
+    hold off
+end
